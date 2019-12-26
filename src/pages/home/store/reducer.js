@@ -1,19 +1,26 @@
 import { fromJS } from 'immutable'
 
 const defaultState = fromJS({
-  topList:[{
-      id:1,
-      title:'社会热点',
-      imgUrl:'/img/pic.png'
-  },{
-      id:2,
-      title:'logo',
-      imgUrl:'/img/logo.png'
-  }]
+    topList: [],
+    descList: [],
+    recommendList: [],
+    descPage:1
 })
 
 export default (state = defaultState, action) => {
     switch (action.type) {
+        case 'init_home_data':
+            return state.merge({
+                topList: fromJS(action.topicList),
+                descList: fromJS(action.descList),
+                recommendList: fromJS(action.recommendList)
+            })
+        case "add_article_list":
+            return state.merge({
+                descList:state.get('descList').concat(action.list),
+                descPage: action.nextPage
+            })
+            // state.set('descList', state.get('descList').concat(action.list))
         default:
             return state
     }

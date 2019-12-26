@@ -20,6 +20,13 @@
       "unicode_decimal": 59473
     },
     {
+      "icon_id": "932517",
+      "name": "转发",
+      "font_class": "zhuanfa",
+      "unicode": "e6f3",
+      "unicode_decimal": 59123
+    },
+    {
       "icon_id": "1621077",
       "name": "Aa",
       "font_class": "Aa",
@@ -27,11 +34,25 @@
       "unicode_decimal": 58934
     },
     {
+      "icon_id": "1621626",
+      "name": "喜欢",
+      "font_class": "xihuan",
+      "unicode": "e630",
+      "unicode_decimal": 58928
+    },
+    {
       "icon_id": "1988779",
       "name": "铅笔",
       "font_class": "pencil",
       "unicode": "e6b3",
       "unicode_decimal": 59059
+    },
+    {
+      "icon_id": "7501072",
+      "name": "评论",
+      "font_class": "pinglun",
+      "unicode": "e620",
+      "unicode_decimal": 58912
     }
   ]
 }

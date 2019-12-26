@@ -4,6 +4,9 @@ import Topic from './component/Topic'
 import List from './component/List'
 import Recommend from './component/Recommend'
 import Writer from './component/Writer'
+import { connect } from 'react-redux'
+import { actionCreators } from './store'
+
 
 class Home extends Component {
     render() {
@@ -12,7 +15,7 @@ class Home extends Component {
                 <HomeLeft>
                     <img className="banner" src={[require("../../static/pic.png")]} alt="zzzhg"></img>
                     <Topic></Topic>
-                    <List></List>   
+                    <List></List>
                 </HomeLeft>
                 <HomeRight>
                     <Recommend></Recommend>
@@ -21,6 +24,14 @@ class Home extends Component {
             </HomeWrapper>
         )
     }
+    componentDidMount() {
+        this.props.getHomeInfo()
+    }
 }
-
-export default Home
+const mapDispatch = (dispatch) => ({
+    getHomeInfo() {
+        const action = actionCreators.getHomeInfo()
+        dispatch(action)
+    }
+})
+export default connect(null, mapDispatch)(Home)
