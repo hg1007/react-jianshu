@@ -3,6 +3,8 @@ import { HeaderWrapper, Logo, Nav, NavItem, NavSearch, Addition, Button, Search,
 import { CSSTransition } from 'react-transition-group'
 import { connect } from 'react-redux'
 import { actionCreators } from './store'
+import { actionCreators as  loginActionCreators} from '../../pages/login/store'
+import { Link } from 'react-router-dom'
 
 class Header extends Component {
   getListArea(show) {
@@ -35,15 +37,17 @@ class Header extends Component {
     }
   }
   render() {
-    const { focused, handInputFocus, handInputBlur, list } = this.props
+    const { focused, handInputFocus, handInputBlur, list, login,logout } = this.props
     return (
       <HeaderWrapper>
-        <Logo></Logo>
+        <Link to="/">
+          <Logo></Logo>
+        </Link>
         <Nav>
           <NavItem className='left active'>首页</NavItem>
           <NavItem className='left'>下载</NavItem>
           <NavItem className='right'><i className='iconfont'>&#xe636;</i></NavItem>
-          <NavItem className='right'>登录</NavItem>
+          {login ? <NavItem className='right' onClick={logout}> 退出 </NavItem> : <Link to="/login"><NavItem className='right'> 登陆 </NavItem></Link>}
           <Search>
             <CSSTransition timeout={500} in={focused} classNames='slide'>
               <NavSearch className={focused ? 'focus' : ''} onFocus={() => handInputFocus(list)} onBlur={handInputBlur}></NavSearch>
@@ -53,8 +57,9 @@ class Header extends Component {
           </Search>
           <Addition>
             <Button className='reg'>注册</Button>
+            <Link to="/write">
             <Button className='writting'><i className='iconfont'>&#xe6b3;</i>写文章</Button>
-
+            </Link>
           </Addition>
         </Nav>
       </HeaderWrapper>
@@ -117,7 +122,8 @@ const mapStateToProps = (state) => {
     list: state.getIn(['header', 'list']),
     page: state.getIn(['header', 'page']),
     mouseIn: state.getIn(['header', 'mouseIn']),
-    totalPage: state.getIn(['header', 'totalPage'])
+    totalPage: state.getIn(['header', 'totalPage']),
+    login: state.getIn(['login', 'login'])
     // state.get('header').get('focused')
 
   }
@@ -158,7 +164,9 @@ const mapDispatchToProps = (dispatch) => {
       } else {
         dispatch(actionCreators.changePage(1))
       }
-
+    },
+    logout(){
+      dispatch(loginActionCreators.logout())
     }
   }
 }

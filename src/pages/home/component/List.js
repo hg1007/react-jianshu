@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { actionCreators } from '../store'
+import { Link } from 'react-router-dom'
 
 import {
     ListItem,
@@ -10,32 +11,34 @@ import {
 } from '../style'
 
 
-class List extends Component {
+class List extends PureComponent {
     render() {
         return (
             <div>
                 {
-                    this.props.list.map((item,index) => {
+                    this.props.list.map((item, index) => {
                         return (
-                            <ListItem key={index}>
-                                <img src={item.get('imgUrl')} alt="" className="pic"></img>
-                                <ListInfo>
-                                    <h3 className="title">{item.get('title')}</h3>
-                                    <p className="desc"> {item.get('desc')} </p>
-                                </ListInfo>
+                            <Link key={index} to={"/detail/" + item.get('id')}>
+                                <ListItem>
+                                    <img src={item.get('imgUrl')} alt="" className="pic"></img>
+                                    <ListInfo>
+                                        <h3 className="title">{item.get('title')}</h3>
+                                        <p className="desc"> {item.get('desc')} </p>
+                                    </ListInfo>
 
-                                <ListIcon>
-                                    <span className="marginR">
-                                        <i className='iconfont'>&#xe620;</i><span className="num">{item.get('num')}</span>
-                                    </span>
-                                    <span className="marginR">
-                                        <i className='iconfont'>&#xe630;</i><span className="num">{item.get('num1')}</span>
-                                    </span>
-                                    <span className="marginR">
-                                        <i className='iconfont'>&#xe6f3;</i><span className="num">{item.get('num2')}</span>
-                                    </span>
-                                </ListIcon>
-                            </ListItem>
+                                    <ListIcon>
+                                        <span className="marginR">
+                                            <i className='iconfont'>&#xe620;</i><span className="num">{item.get('num')}</span>
+                                        </span>
+                                        <span className="marginR">
+                                            <i className='iconfont'>&#xe630;</i><span className="num">{item.get('num1')}</span>
+                                        </span>
+                                        <span className="marginR">
+                                            <i className='iconfont'>&#xe6f3;</i><span className="num">{item.get('num2')}</span>
+                                        </span>
+                                    </ListIcon>
+                                </ListItem>
+                            </Link>
                         )
                     })
                 }

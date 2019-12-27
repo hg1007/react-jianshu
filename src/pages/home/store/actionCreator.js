@@ -30,3 +30,15 @@ export const getMoreList = (page) => {
         })
     }
 }
+
+export const toggleTopShow = (show) => {
+    return (dispatch) => {
+        const action = {
+            type: 'toggle_Top_Show',
+            show: show
+        }
+        console.log('!!!!!!!!!',action)
+        dispatch(action)
+
+    }
+}
